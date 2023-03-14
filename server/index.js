@@ -32,8 +32,12 @@ pool.getConnection((err, connection) => {
         
     });
 });
-// close the pool when the Node.js process is terminated
 
+
+
+
+
+// close the pool when the Node.js process is terminated
 process.on('SIGINT', () => {
     pool.end(err => {
         if (err) return console.log(err);
