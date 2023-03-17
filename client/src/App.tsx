@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ShowAll from './pages/ShowAll';
 
-function App() {
 
+function App() {
+  
   return (
     <Router>
       <div>

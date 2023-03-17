@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 //fetch all users
 router.get('/getAll', (req, res) => {
@@ -66,7 +67,9 @@ router.post('/login', async (req, res) => {
         //check if password is correct
         try{
             if(bcrypt.compareSync(Password, results[0].Password)){
-                res.send('Logged in');
+                //generate and sign the JWT
+                const token = jwt.sign({ id: results[0].id }, process.env.JWT_SECRET, { expiresIn: 3600 });
+                res.send({ token });
             }else{
                 res.send('Incorrect password');
             }
