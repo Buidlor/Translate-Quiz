@@ -47,7 +47,7 @@ router.post('/subscribe', async (req, res) => {
             res.send(results);
         });
     }catch(err){
-        console.log(err);
+        console.log(err, "some error here");
         res.status(500).send('Server error');
     }
 });
