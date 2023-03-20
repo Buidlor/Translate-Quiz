@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
@@ -16,6 +18,11 @@ const Login = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("submit");
+        if (username === "" || password === "") {
+            console.log("Please fill in all fields");
+            setError("Please fill in all fields");
+            return;
+        }
         navigate("/ShowAll")
     }
 
@@ -43,6 +50,7 @@ const Login = () => {
               className="w-full bg-green-600 text-white py-2 px-6 rounded-md shadow-md hover:bg-green-700"
             />
           </form>
+          <p>{error}</p>
         </div>
       </div>
     )

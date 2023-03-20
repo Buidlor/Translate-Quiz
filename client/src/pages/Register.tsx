@@ -10,6 +10,7 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
 
     
     
@@ -30,6 +31,11 @@ const Register = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
        
+        if (password !== confirmPassword) {
+            console.log("Passwords don't match");
+            setError("Passwords don't match");
+            return;
+        }
         axios.post("http://localhost:3000/users/subscribe", {
             username: username,
             email: email,
@@ -41,6 +47,7 @@ const Register = () => {
         })
         .catch((err) => {
             console.log(err);
+            setError(err.response.data.message);
         })
     }
     return (
@@ -79,6 +86,7 @@ const Register = () => {
               className="w-full bg-green-600 text-white py-2 px-6 rounded-md shadow-md hover:bg-green-700"
             />
           </form>
+          <p>{error} </p>
         </div>
       </div>
     )
