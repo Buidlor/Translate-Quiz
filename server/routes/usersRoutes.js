@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
     const { UserName, Password } = req.body;
     //check if fields are empty
     if(!UserName || !Password){
-        console.log("iusernam and password are true/false", UserName, Password );
+        console.log("usernam and password are true/false", UserName, Password );
         return res.status(400).send('Please fill all fields');
     }
     //check if username exists
@@ -72,7 +72,7 @@ router.post('/login', async (req, res) => {
                 const token = jwt.sign({ id: results[0].id }, process.env.JWT_SECRET, { expiresIn: 3600 });
                 res.send({ token });
             }else{
-                res.send('Incorrect password');
+                res.status(400).send({ message: 'Incorrect password' });
             }
         }catch(err){
             console.log(err);

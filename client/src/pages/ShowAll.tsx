@@ -26,10 +26,15 @@ const showAll = () => {
     .catch((err) => {
       console.log(err);
     })
-  }, [navigate]);
+  }, []);
 
   const handleRandomWord = () => {
-    const newRandomWord = words[Math.floor(Math.random() * words.length)];
+  
+    let newRandomWord = words[Math.floor(Math.random() * words.length)];
+    do {
+      newRandomWord = words[Math.floor(Math.random() * words.length)];
+    } while (newRandomWord === randomWord && words.length > 1);
+
     setRandomWord(newRandomWord)
     return newRandomWord;
   }

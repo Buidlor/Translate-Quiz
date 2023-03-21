@@ -14,12 +14,15 @@ const InputAnswer = ({randomWord, words, handleScore, handleRandomWord, handleWo
         e.preventDefault();
         
         if (answer === randomWord.English) {
+            if (words.length === 1) {
+                console.log("Game Over!");
+                return;
+            }
             handleScore();
-            // handleWords();
-            // handleRandomWord();
             setAnswer("");
             console.log("new words ",handleWords());
             console.log("new randomWord ",handleRandomWord());
+            console.log("words length ",words.length);
         }
         else {
             console.log("Incorrect!");
