@@ -37,9 +37,9 @@ const Register = () => {
             return;
         }
         axios.post("http://localhost:3000/users/subscribe", {
-            username: username,
-            email: email,
-            password: password,  
+            UserName: username,
+            Email: email,
+            Password: password,  
         })
         .then((res) => {
             console.log(res);

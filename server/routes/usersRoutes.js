@@ -56,6 +56,7 @@ router.post('/login', async (req, res) => {
     const { UserName, Password } = req.body;
     //check if fields are empty
     if(!UserName || !Password){
+        console.log("iusernam and password are true/false", UserName, Password );
         return res.status(400).send('Please fill all fields');
     }
     //check if username exists

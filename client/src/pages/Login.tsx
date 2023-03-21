@@ -9,6 +9,9 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
+    // get axios login data
+
+
     const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
     }
@@ -21,9 +24,21 @@ const Login = () => {
         if (username === "" || password === "") {
             console.log("Please fill in all fields");
             setError("Please fill in all fields");
-            return;
         }
-        navigate("/ShowAll")
+        else{
+          axios.post("http://localhost:3000/users/login", {
+              UserName: username,
+              Password: password,
+          })
+          .then((res) => {
+              console.log(res);
+              navigate("/ShowAll")
+          })
+          .catch((err) => {
+              console.log(err);
+              setError(err.response.data.message);
+          })
+        }
     }
 
     return (
