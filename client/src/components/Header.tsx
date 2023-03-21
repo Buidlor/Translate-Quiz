@@ -4,7 +4,7 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-const Header = () => {
+const Header = ({score}) => {
 
   const [rulesDropdown, setRulesDropdown] = useState(false);
 
@@ -12,9 +12,15 @@ const Header = () => {
     setRulesDropdown(!rulesDropdown);
   };
 
+  
+  const handleLogout = () => {
+    localStorage.removeItem("x-auth-token");
+    console.log("logout");
+    window.location.reload();
+  }
     return (
         <header className="bg-green-400">
-        <nav className="container mx-auto px-4 py-2 flex justify-between items-center">
+        <nav className="container mx-auto px-4 py-2 flex justify-between items-center h-16">
           <h1 className="text-3xl text-white font-bold">Translate Quiz</h1>
           <ul className="hidden md:flex space-x-8">
             <li className="text-white font-extrabold hover:text-gray-300">
@@ -47,11 +53,13 @@ const Header = () => {
                </div>
               )}
             </li>
-            <li className="text-white font-extrabold hover:text-gray-300">
-              Score
+            <li className="font-extrabold text-blue-500 hover:text-gray-300 animate-pulse transition-transform duration-500">
+              <span className="hover:scale-100 scale-150">Score:</span><span>{score}</span>
             </li>
           </ul>
-          <button className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50">
+          <button className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
+                onClick={handleLogout}
+            >
             <FontAwesomeIcon icon={faSignOutAlt} />
           </button>
         </nav>

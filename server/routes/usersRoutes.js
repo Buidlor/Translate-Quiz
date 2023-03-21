@@ -81,5 +81,37 @@ router.post('/login', async (req, res) => {
     });
 });
 
+router.get('/verify', (req, res) => {
+    try{
+        const token = req.header('x-auth-token');
+        if(!token){
+            return res.send(false);
+        }
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        if(!verified){
+            return res.send(false);
+        }
+        res.send(true);
+    }catch(err){
+        res.status(500).send('Server error');
+    }
+});
+
+router.post('/logout', (req, res) => {
+    try{
+        const token = req.header('x-auth-token');
+        if(!token){
+            return res.send(false);
+        }
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        if(!verified){
+            return res.send(false);
+        }
+        res.send(true);
+    }catch(err){
+        res.status(500).send('Server error');
+    }
+});
+
 
 module.exports = router;

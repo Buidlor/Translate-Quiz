@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 
 
@@ -52,6 +54,7 @@ const Register = () => {
     }
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-400 to-blue-500">
+        <FontAwesomeIcon icon={faArrowLeft} className="text-white text-2xl absolute top-4 left-4 cursor-pointer" onClick={() => navigate("/")} />
         <div className="bg-white p-8 rounded-lg shadow-md w-full md:w-1/3">
           <h1 className="text-4xl md:text-5xl text-center text-green-600 mb-8">Register</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
